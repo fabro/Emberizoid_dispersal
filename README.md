@@ -10,7 +10,7 @@ Data: This folder contains the core files used for this study
 
 	-corrected_mcc.txt: This file is the Barker et al. (2015) MCC phylogenetic tree, with the tips modified to match the 2019 Emberizoidea taxonomy.
 
-	-Emberizo maps: a shape file in geographic projection containing the species of Emberizoidea; this is a subset of the GDB provided by BirdLife International (2019).
+	-Emberizo maps: a text file with the link to species' shapefiles as obtained from the GDB provided by BirdLife International (2019).
 
 	-emberizoidea_radiation: a table containing the taxonomy of the Emberizoids (as for 2019), including some notes regarding their distribution and English names
 	
