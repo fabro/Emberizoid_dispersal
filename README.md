@@ -31,6 +31,7 @@ PGLS: This folder contains all the required files to conduct a PGLS where area i
 	-corrected_mcc.txt: This file is the Barker et al. (2015) MCC phylogenetic tree, with the tips modified to match the 2019 Emberizoidea taxonomy.
 
 	-hwi_data_sub.csv: This file contains the Emberizoidea species that had at least 3 measured specimens, formatted to match the phylogeny (sp), the average HWI per species (HWI), their migratory behavior	(migratory), and the area of distribution (area). The last two are calculated as specified in the study using QGIS.
+	
 	-PGLS-phylogenetic signal.R: This script contains the code to calculate the PGLS where area is predicted by HWI, along with the calculations for phylogenetic signal and phylogenetic half-life through the fit and comparison of evolutionary models.
 
 	
