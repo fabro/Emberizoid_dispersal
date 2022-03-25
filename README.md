@@ -1,6 +1,6 @@
 # Emberizoid_dispersal
 
-This repository contains the necessary code and data to reproduce the analyses performed in Arango et al. "Hand-Wing Index as a surrogate for dispersal: the case of the Emberizoidea radiation" submitted to Biology Letters. 
+This repository contains the necessary code and data to reproduce the analyses performed in Arango et al. "Hand-Wing Index as a surrogate for dispersal: the case of the Emberizoidea radiation" submitted to the Biological Journal of the Linnean Society. 
 
 File description:
 
