@@ -5,16 +5,15 @@ library(geiger)
 library(AICcmodavg)
 library(phytools)
 library(qpcR)
-setwd("~/Documents/HWI-DISP_masterscript/PGLS/")
+setwd("~/PGLS/")
 ##load tree
 etree<-read.tree("corrected_mcc.txt")#Barker et al 2015 MCC tree
-radiation<-read.csv("emberizoidea_radiation.csv")#names and families of the Emberizoidea species
+#radiation<-read.csv("emberizoidea_radiation.csv")#names and families of the Emberizoidea species
 #create a vector for the families
-families<-data.frame(as.character(radiation$scientific_name),as.character(radiation$family))
-names(families)<-c("sp","family")
+#families<-data.frame(as.character(radiation$scientific_name),as.character(radiation$family))
+#names(families)<-c("sp","family")
 #load Emberizoidea HWI database without distances
-hwicom<-read.csv("hwi_data_sub.csv",header=T)
-
+hwicom<-read.table("hwi_data_sub.txt",header=T,sep="\t")
 #create a sub tree with only the tips that contain HWI data
 obj1<-etree$tip.label[which(!is.na(match(etree$tip.label,hwicom$sp)))]
 hwitree<-keep.tip(etree,obj1)
@@ -25,13 +24,18 @@ comp.hwi<-comparative.data(hwitree, hwicom, names.col="sp", vcv.dim=T, warn.drop
 
 #run pgls
 modellogarea<-pgls(log(area)~HWI,lambda = "ML",data = comp.hwi)#simple model where area is predicted by hwi
+summary(modellogarea)
 modellogareamig<-pgls(log(area)~HWI:migratory,lambda="ML",data=comp.hwi)#model where area is predicted by hwi, taking into account the migratory beheavior
+summary(modellogareamig)
 migrantphyloaov<-phylANOVA(comp.hwi$phy,comp.hwi$data$migratory,comp.hwi$data$HWI,nsim = 1000,posthoc = T)#phylogenetic anova to account for the differences in wing shape between migratory and non-migratory beheavior
 ####calculate AIC for the models
+migrantphyloaov
+migrantphylo<-pgls(HWI~migratory,lambda="ML",data=comp.hwi)
+summary(migrantphylo)
 modelsx<-list(modellogarea,modellogareamig)
 slex<-AIC(modellogarea,modellogareamig)
 
-AICscores<-c(1636.782, 1599.902)
+AICscores<-c(slex$AIC[1],slex$AIC[2])
 #AICscores<-c(1644.911, 1602.1)
 clem<-akaike.weights(AICscores)
 aicw(AICscores)
@@ -61,3 +65,4 @@ phylosignalwhite<-fitContinuous(comp.hwi$phy,hwidat,model = "white")
 aicx<-c(phylosignalOU$opt$aicc,phylosignalBM$opt$aicc,phylosignalEB$opt$aicc,phylosignalwhite$opt$aicc)
 aicw(aicx)
 ######
+
